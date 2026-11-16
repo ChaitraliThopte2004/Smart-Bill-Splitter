@@ -1,0 +1,194 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1>User Dashboard</h1>
+
+
+<!-- Add Expense Form -->
+<div class="card">
+    <h2>Add Expense</h2>
+
+    <form method="POST" action="/add_expense">
+        <label>Category</label><br>
+        <select name="category">
+            <option>Food</option>
+            <option>Rent</option>
+            <option>Travel</option>
+            <option>Shopping</option>
+            <option>Other</option>
+        </select><br><br>
+
+        <label>Amount</label><br>
+        <input type="number" name="amount" required><br><br>
+
+        <button class="btn" type="submit">Add Expense</button>
+    </form>
+</div>
+
+<div class="grid">
+
+    <div class="card">
+        <h2>Total Spent</h2>
+        <p>₹ {{ total_spent }}</p>
+    </div>
+
+    <div class="card">
+        <h2>Total Savings</h2>
+        <p>₹ {{ total_savings }}</p>
+    </div>
+
+    <div class="card">
+        <h2>Monthly Expense</h2>
+        <p>₹ {{ monthly_expense }}</p>
+    </div>
+
+    <div class="card">
+        <h2>Daily Expense</h2>
+        <p>₹ {{ daily_expense }}</p>
+    </div>
+
+</div>
+
+
+<!-- Category-wise summary -->
+<div class="card">
+    <h2>Expense by Category</h2>
+    <table>
+        <tr>
+            <th>Category</th>
+            <th>Amount</th>
+        </tr>
+        {% for c, amt in category_expenses %}
+        <tr>
+            <td>{{ c }}</td>
+            <td>₹ {{ amt }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+
+<!-- Recent Expenses -->
+<div class="card">
+    <h2>Recent Expenses</h2>
+    <table>
+        <tr>
+            <th>Date</th>
+            <th>Category</th>
+            <th>Amount</th>
+        </tr>
+        {% for e in recent_expenses %}
+        <tr>
+            <td>{{ e[4] }}</td>
+            <td>{{ e[2] }}</td>
+            <td>₹ {{ e[3] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+
+<!-- Subscription Reminders -->
+<div class="card">
+    <h2>Subscription Reminders</h2>
+
+    <h3>Due Today</h3>
+    {% if due_today %}
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Amount</th>
+            <th>Due Date</th>
+        </tr>
+        {% for s in due_today %}
+        <tr>
+            <td>{{ s[0] }}</td>
+            <td>₹ {{ s[1] }}</td>
+            <td>{{ s[2] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% else %}
+    <p>No subscriptions due today!</p>
+    {% endif %}
+
+    <h3>Upcoming (Next 7 Days)</h3>
+    {% if upcoming %}
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Amount</th>
+            <th>Due Date</th>
+        </tr>
+        {% for s in upcoming %}
+        <tr>
+            <td>{{ s[0] }}</td>
+            <td>₹ {{ s[1] }}</td>
+            <td>{{ s[2] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% else %}
+    <p>No upcoming subscriptions!</p>
+    {% endif %}
+</div>
+
+<div style="margin-top:20px; text-align:center;">
+    <a href="/feedback" 
+       style="
+       display:inline-block;
+       padding:12px 26px;
+       background: linear-gradient(45deg, #6a11cb, #2575fc);
+       color:white;
+       border-radius:30px;
+       font-size:16px;
+       font-weight:600;
+       text-decoration:none;
+       box-shadow:0 6px 16px rgba(0,0,0,0.25);
+       transition:0.3s;">
+       ⭐ Give Feedback
+    </a>
+</div>
+
+
+<!-- 🔔 POPUP NOTIFICATION SYSTEM -->
+<div id="notify" 
+     style="display:none; 
+            position:fixed; 
+            bottom:20px; 
+            right:20px; 
+            background:#2d6cdf; 
+            color:white; 
+            padding:15px 20px; 
+            border-radius:10px;
+            box-shadow:0 3px 10px rgba(0,0,0,.3);
+            font-weight:bold;">
+</div>
+
+<script>
+function showNotification(text){
+    let box = document.getElementById("notify");
+    box.innerText = text;
+    box.style.display = "block";
+
+    setTimeout(()=>{ 
+        box.style.display = "none"; 
+    }, 4000);
+}
+</script>
+
+{% if due_today %}
+<script>
+showNotification("You have subscriptions due TODAY!");
+</script>
+{% endif %}
+
+{% if upcoming %}
+<script>
+showNotification("You have upcoming subscriptions in the next 7 days");
+</script>
+
+
+{% endif %}
+
+{% endblock %}

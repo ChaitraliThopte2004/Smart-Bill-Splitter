@@ -1,0 +1,18 @@
+<h2>User Dashboard</h2>
+
+<h3>Total Spent: {{total}}</h3>
+
+<table border="1">
+<tr><th>Category</th><th>Total</th></tr>
+
+{% for c in expenses %}
+<tr>
+<td>{{c[0]}}</td>
+<td>{{c[1]}}</td>
+</tr>
+{% endfor %}
+</table>
+
+<a href="/add_expense">Add Expense</a><br>
+<a href="/subscriptions">Subscriptions</a><br>
+<a href="/logout">Logout</a>

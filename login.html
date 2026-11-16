@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Smart Bill Splitter - Login</title>
+</head>
+<body style="margin:0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+             background: linear-gradient(135deg, #893fd7, #799ad5); 
+             display:flex; justify-content:center; align-items:center; height:100vh;">
+
+  <div style="display:flex; background: rgba(255,255,255,0.95); border-radius:20px; 
+              box-shadow:0 15px 40px rgba(0,0,0,0.3); overflow:hidden; max-width:900px; width:90%; height:600px;">
+
+    <!-- Left Side: Image -->
+    <div style="flex:1; overflow:hidden;">
+      <img src="{{ url_for('static', filename='s1.jpg') }}" 
+           style="width:100%; height:90%;">
+    </div>
+
+    <!-- Right Side: Login Form -->
+    <div style="flex:1; padding:50px 40px; display:flex; flex-direction:column; justify-content:center;">
+
+      <h2 style="color:#6a11cb; font-size:32px; margin-bottom:20px; text-align:center; text-shadow:1px 1px 3px rgba(0,0,0,0.2);">
+        Welcome Back
+      </h2>
+      <p style="text-align:center; font-size:16px; color:#333; margin-bottom:25px;">
+        Manage your personal expenses, subscriptions, and budget effortlessly.
+      </p>
+
+      <form method="post" style="display:flex; flex-direction:column; gap:15px;">
+        <input name="username" placeholder="Username" required
+               style="padding:12px; border:1px solid #ccc; border-radius:10px; font-size:15px; transition:0.3s; outline:none;"
+               onfocus="this.style.borderColor='#6a11cb';" onblur="this.style.borderColor='#ccc';">
+
+        <input name="password" type="password" placeholder="Password" required
+               style="padding:12px; border:1px solid #ccc; border-radius:10px; font-size:15px; transition:0.3s; outline:none;"
+               onfocus="this.style.borderColor='#6a11cb';" onblur="this.style.borderColor='#ccc';">
+
+        <button type="submit"
+                style="padding:14px; border:none; border-radius:12px; background: linear-gradient(135deg, #6a11cb, #2575fc); color:white; font-size:16px; font-weight:bold; cursor:pointer; box-shadow:0 5px 15px rgba(0,0,0,0.2); transition: all 0.3s;"
+                onmouseover="this.style.background='linear-gradient(135deg, #2575fc, #6a11cb)'; this.style.boxShadow='0 8px 20px rgba(0,0,0,0.3)';"
+                onmouseout="this.style.background='linear-gradient(135deg, #6a11cb, #2575fc)'; this.style.boxShadow='0 5px 15px rgba(0,0,0,0.2)';">
+          Login
+        </button>
+      </form>
+
+      <a href="/register"
+         style="display:block; margin-top:18px; text-align:center; color:#6a11cb; font-weight:bold; text-decoration:none; transition:0.3s;"
+         onmouseover="this.style.textDecoration='underline';"
+         onmouseout="this.style.textDecoration='none';">
+        Create Account
+      </a>
+
+      <!-- Feature Highlights -->
+      <div style="margin-top:30px; display:flex; flex-direction:column; gap:12px; font-size:14px; color:#555;">
+        <div style="display:flex; align-items:center; gap:10px;">
+          <img src="https://img.icons8.com/ios-filled/24/6a11cb/wallet.png"/>
+          <span>Track personal expenses easily</span>
+        </div>
+        <div style="display:flex; align-items:center; gap:10px;">
+          <img src="https://img.icons8.com/ios-filled/24/6a11cb/calendar.png"/>
+          <span>Manage subscription reminders</span>
+        </div>
+        <div style="display:flex; align-items:center; gap:10px;">
+          <img src="https://img.icons8.com/ios-filled/24/6a11cb/graph.png"/>
+          <span>Get insights and budget analysis</span>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</body>
+</html>

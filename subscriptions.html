@@ -1,0 +1,22 @@
+<h2>Subscriptions</h2>
+
+<form method="post">
+<input name="name" placeholder="Subscription Name">
+<input name="amount" placeholder="Amount">
+<input name="due" type="date">
+<button>Add</button>
+</form>
+
+<table border="1">
+<tr><th>Name</th><th>Amount</th><th>Due Date</th></tr>
+
+{% for s in subs %}
+<tr>
+<td>{{s[2]}}</td>
+<td>{{s[3]}}</td>
+<td>{{s[4]}}</td>
+</tr>
+{% endfor %}
+</table>
+
+<a href="/dashboard">Back</a>

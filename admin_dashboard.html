@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1>Admin Dashboard</h1>
+
+<div class="grid">
+
+    <div class="card">
+        <h2>Total Users</h2>
+        <p>{{ total_users }}</p>
+    </div>
+
+    <div class="card">
+        <h2>Total Expenses Logged</h2>
+        <p>{{ total_expenses }}</p>
+    </div>
+
+    <div class="card">
+        <h2>System Status</h2>
+        <p>Running Smoothly ✔</p>
+    </div>
+
+</div>
+
+<div class="card">
+    <h2>Registered Users</h2>
+
+    <table border="1" cellpadding="8">
+        <tr>
+            <th>ID</th>
+            <th>Username</th>
+            <th>Role</th>
+        </tr>
+
+        {% for u in users %}
+        <tr>
+            <td>{{ u[0] }}</td>
+            <td>{{ u[1] }}</td>
+            <td>{{ u[3] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+{% endblock %}
+<!-- NOTIFICATION SECTION -->
+{% if due_today %}
+<div style="background:#ffcccc;padding:15px;border-radius:10px;margin-bottom:15px;">
+    <h3>🚨 Payments Due Today</h3>
+    <ul>
+        {% for s in due_today %}
+        <li><b>{{ s[0] }}</b> — ₹{{ s[1] }} (Due: {{ s[2] }})</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
+
+{% if upcoming %}
+<div style="background:#fff3cd;padding:15px;border-radius:10px;margin-bottom:15px;">
+    <h3>⏳ Upcoming Payments (Next 7 Days)</h3>
+    <ul>
+        {% for s in upcoming %}
+        <li><b>{{ s[0] }}</b> — ₹{{ s[1] }} (Due: {{ s[2] }})</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
